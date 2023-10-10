@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using Person.API.Services;
 using Person.API.Settings;
 
@@ -11,6 +12,10 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+{
+    return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

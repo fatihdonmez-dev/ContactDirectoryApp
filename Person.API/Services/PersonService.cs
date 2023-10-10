@@ -15,7 +15,7 @@ namespace Person.API.Services
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
-            _personCollection = database.GetCollection<Models.Person>(databaseSettings.ProductCollectionName);
+            _personCollection = database.GetCollection<Models.Person>(databaseSettings.CollectionName);
             _mapper = mapper;
         }
 
