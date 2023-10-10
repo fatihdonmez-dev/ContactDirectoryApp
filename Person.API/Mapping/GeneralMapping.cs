@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using MongoDB.Driver.Core.Misc;
 using Person.API.Dtos;
-using Person.API.Models;
 
 namespace Person.API.Mapping
 {
