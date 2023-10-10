@@ -1,9 +1,12 @@
+using Person.API.Services;
 using Person.API.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Adding our custom data services
+builder.Services.AddScoped<IPersonService, PersonService>();
 
+// Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 
