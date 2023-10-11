@@ -23,8 +23,8 @@ namespace Report.API.Que.Consumer
 
         public async Task Consume(ConsumeContext<ReportRequestDto> context)
         {
-            var report = await _reportCollection.Find<ReportDto>(p => p.Id == context.Message.ReportId).ToListAsync();
-            if(report.Any()) 
+            var report = await _reportCollection.Find<ReportDto>(p => p.Id == context.Message.ReportId).FirstOrDefaultAsync();
+            if(report != null) 
             {
                 var persons = await _personCollection.Find<PersonDto>(x => x.ContactInfo != null).ToListAsync();
 
@@ -39,6 +39,10 @@ namespace Report.API.Que.Consumer
                         phone_counter += x.ContactInfo.Where(z => z.InfoType == InfoType.PhoneNumber).Count();
                     }
                 });
+
+                report.RegisteredPersonCount = person_counter;
+                report.PhoneCount = phone_counter;
+                report.Status = ReportStatusType.Ready;
             }
 
         }

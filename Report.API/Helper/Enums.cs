@@ -4,7 +4,6 @@
     {
         public enum ReportStatusType
         {
-            InRequest,
             Processing,
             Ready
         }
