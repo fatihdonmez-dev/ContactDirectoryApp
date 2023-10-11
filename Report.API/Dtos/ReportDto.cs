@@ -2,7 +2,7 @@
 
 namespace Report.API.Dtos
 {
-    public class RaportDto
+    public class ReportDto
     {
         public string Id { get; set; }
         public string Location { get; set; }

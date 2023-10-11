@@ -8,5 +8,11 @@
             Processing,
             Ready
         }
+        public enum InfoType
+        {
+            PhoneNumber,
+            Email,
+            Location
+        }
     }
 }
