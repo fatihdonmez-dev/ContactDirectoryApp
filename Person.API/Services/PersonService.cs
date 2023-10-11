@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using Person.API.Dtos;
 using Person.API.Settings;
@@ -36,6 +38,13 @@ namespace Person.API.Services
             await _personCollection.InsertOneAsync(newPerson);
 
             return _mapper.Map<PersonDto>(newPerson);
+        }
+
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var result = await _personCollection.DeleteOneAsync(x => x.Id == id);
+
+           return result.DeletedCount > 0 ? true : false;
         }
 
     }

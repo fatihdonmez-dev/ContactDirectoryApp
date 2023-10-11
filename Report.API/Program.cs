@@ -1,12 +1,14 @@
 using MassTransit;
 using Microsoft.Extensions.Options;
 using Report.API.Que.Consumer;
+using Report.API.Services;
 using Report.API.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllers();
 
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));

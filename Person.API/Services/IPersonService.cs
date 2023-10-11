@@ -1,4 +1,5 @@
-﻿using Person.API.Dtos;
+﻿using Microsoft.AspNetCore.Mvc;
+using Person.API.Dtos;
 
 namespace Person.API.Services
 {
@@ -6,5 +7,6 @@ namespace Person.API.Services
     {
         Task<List<PersonDto>> GetAllAsync();
         Task<PersonDto> CreateAsync(PersonCreateDto personCreateDto);
+        Task<bool> DeleteAsync(string id);
     }
 }

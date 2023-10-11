@@ -37,5 +37,15 @@ namespace Person.API.Controllers
                 return BadRequest(new { errorMessage = "Somethings gone wrong!" });
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(string id)
+        {
+            var response = await _personService.DeleteAsync(id);
+
+            if (response)
+                return Ok();
+            else return NotFound();
+        }
     }
 }
