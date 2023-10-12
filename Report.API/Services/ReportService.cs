@@ -20,7 +20,7 @@ namespace Report.API.Services
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
-            _reportCollection = database.GetCollection<Models.Report>(databaseSettings.CollectionName);
+            _reportCollection = database.GetCollection<Models.Report>(databaseSettings.ReportCollectionName);
         }
 
         public async Task<List<ReportDto>> GetAllReportsAsync()

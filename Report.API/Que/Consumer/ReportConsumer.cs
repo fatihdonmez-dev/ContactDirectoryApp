@@ -17,8 +17,8 @@ namespace Report.API.Que.Consumer
             var client = new MongoClient(databaseSettings.ConnectionString);
             var database = client.GetDatabase(databaseSettings.DatabaseName);
 
-            _reportCollection = database.GetCollection<ReportDto>(databaseSettings.CollectionName);
-            _personCollection = database.GetCollection<Dtos.PersonDto>(databaseSettings.ReportCollectionName);
+            _reportCollection = database.GetCollection<ReportDto>(databaseSettings.ReportCollectionName);
+            _personCollection = database.GetCollection<Dtos.PersonDto>(databaseSettings.CollectionName);
         }
 
         public async Task Consume(ConsumeContext<ReportRequestDto> context)
@@ -43,6 +43,7 @@ namespace Report.API.Que.Consumer
                 report.RegisteredPersonCount = person_counter;
                 report.PhoneCount = phone_counter;
                 report.Status = ReportStatusType.Ready;
+                await _reportCollection.FindOneAndReplaceAsync(x => x.Id == report.Id, report);
             }
 
         }
