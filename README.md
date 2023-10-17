@@ -18,3 +18,9 @@ Uygulamada kullanılan teknolojiler;
  - RabbitMQ
  - Ortam sağlayıcı olarak Docker kullanılmıştır.
  - İhtiyaç olan kurulumlar için proje içinde docker-notes text dosyasında cmd kodları paylaşılmıştır.
+
+Örnek kullanım senaryosu:
+- Person API ile post methodu kullanılarak kişi eklenir (eklenen kişilere lokasyon bilgisi aynı olacak birden fazla kayıt girilmesi raporu zenginelştirecektir.)
+- Person API ile eklenen kayıtlar get methodu ile listelenerek kontrol edilebilir.
+- Report API ile ilk olarak post methodu kullanılarak hangi lokasyon için veri çekilmek isteniyorsa bir rapor isteğinde bulunulur.
+- Report API get methodu kullanılarak var olan raporların listesi çekilebilir. (Durumu tamamlanan veya rabbitmq kuyruğunda işlemi devam eden raporlar listenelecektir)
