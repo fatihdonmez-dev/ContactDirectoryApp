@@ -7,7 +7,7 @@ using static Report.API.Helper.Enums;
 
 namespace Report.API.Que.Consumer
 {
-    public class ReportConsumer : IConsumer<ReportRequestDto>
+    public class ReportConsumer : IConsumer<ReportCreateDto>
     {
         private readonly IMongoCollection<ReportDto> _reportCollection;
         private readonly IMongoCollection<PersonDto> _personCollection;
@@ -21,7 +21,7 @@ namespace Report.API.Que.Consumer
             _personCollection = database.GetCollection<Dtos.PersonDto>(databaseSettings.CollectionName);
         }
 
-        public async Task Consume(ConsumeContext<ReportRequestDto> context)
+        public async Task Consume(ConsumeContext<ReportCreateDto> context)
         {
             var report = await _reportCollection.Find<ReportDto>(p => p.Id == context.Message.ReportId).FirstOrDefaultAsync();
             if(report != null) 

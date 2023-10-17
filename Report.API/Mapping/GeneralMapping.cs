@@ -10,6 +10,7 @@ namespace Report.API.Mapping
         public GeneralMapping()
         {
             CreateMap<Models.Report, ReportDto>().ReverseMap();
+            CreateMap<ReportCreateDto, ReportRequestDto>().ReverseMap();
         }
     }
 }

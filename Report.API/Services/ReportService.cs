@@ -50,9 +50,11 @@ namespace Report.API.Services
                 var newReport = new Models.Report { Location = reportRequestDto.Location, PhoneCount = 0, RegisteredPersonCount = 0, ReportDate = DateTime.Now, Status = Helper.Enums.ReportStatusType.Processing };
 
                 await _reportCollection.InsertOneAsync(newReport);
-                reportRequestDto.ReportId = newReport.Id;
 
-                await sendEndpoint.Send<ReportRequestDto>(reportRequestDto);
+                var newReportCreate = _mapper.Map<ReportCreateDto>(reportRequestDto);
+                newReportCreate.ReportId = newReport.Id;
+
+                await sendEndpoint.Send<ReportCreateDto>(newReportCreate);
 
                 return true;
             }
