@@ -1,17 +1,11 @@
-﻿# 1. Aşama: Yapılandırma
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS build
+﻿# 1. Aşama: Yapılandırma ve Derleme
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /app
 COPY . .
+RUN dotnet publish -c Release -o out
 
-# 2. Aşama: Derleme
-FROM build AS publish
-RUN dotnet publish -c Release -o /app/publish
-
-# 3. Aşama: Çalıştırma
+# 2. Aşama: Çalıştırma
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/out .
 ENTRYPOINT ["dotnet", "Report.API.dll"]
-
-
-# docker build -t report-service-image -f Dockerfile .
