@@ -42,7 +42,7 @@ namespace XunitTestProject.Projects.Person.API
             // Arrange: Test için gerekli hazýrlýklar
 
             // Act: Mevcut olmayan bir endpoint'i çaðýr
-            var response = await _client.GetAsync("/api/persons/12");
+            var response = await _client.GetAsync("/api/persons/1265");
 
 
             // Assert: Yanýtý kontrol et

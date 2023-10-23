@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Person.API.Dtos;
 using Person.API.Services;
@@ -22,6 +23,15 @@ namespace Person.API.Controllers
             var person_response = await _personService.GetAllAsync();
 
             return new OkObjectResult(person_response);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAllById(string id)
+        {
+            var person_response = await _personService.GetAllAsync();
+
+            //return new OkObjectResult(person_response);
+            return NotFound();
         }
 
         [HttpPost]
